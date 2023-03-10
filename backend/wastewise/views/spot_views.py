@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
 
 from ..models.spot import Spot
-from ..serializers import SpotSerializer
+from ..serializers import SpotSerializer, SpotWriteSerializer
 
 class Spots(generics.ListCreateAPIView):
     """
@@ -18,16 +18,55 @@ class Spots(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = SpotSerializer
 
-    # View all spots
     def get(self, request):
+        """View all spots"""
         spots = Spot.objects.filter(owner=request.user.id)
-        data = SpotSerializer(spots, many=True).data
-        return Response({ 'spots': data })
+        serializer = SpotSerializer(spots, many=True).data
+        return Response({ 'spots': serializer.data })
     
     def post(self, request):
+        """Create Spot"""
         request.data['spot']['owner'] = request.user.id
-        spot = SpotSerializer(data = request.data['spot'])
-        if spot.is_valid():
-            spot.save()
-            return Response({'spot': spot.data}, status=status.HTTP_201_CREATED)
-        return Response(spot.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = SpotWriteSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'spot': serializer.data}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class SpotDetailView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes=(IsAuthenticated,)
+    serializer_class = SpotSerializer
+
+    def get(self, request, pk):
+        """View single spot"""
+        spot = get_object_or_404(Spot, pk=pk)
+        serializer = SpotSerializer(spot)
+        
+        if request.user != spot.owner:
+            raise PermissionDenied('Unauthorized access')
+        
+        data = SpotSerializer(spot).data
+        return Response({'spot': serializer.data})
+    
+    def patch(self, request, pk):
+        """Update single spot"""
+        spot = get_object_or_404(Spot, pk=pk)
+        serializer = SpotSerializer(spot, data=request.data)
+
+        if request.user != spot.owner:
+            raise PermissionDenied('Unauthorized access')
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request, pk):
+        """Delete single spot"""
+        spot = get_object_or_404(Spot, pk=pk)
+        
+        if request.user != spot.owner:
+            raise PermissionDenied('Unauthorized access')
+        
+        spot.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
