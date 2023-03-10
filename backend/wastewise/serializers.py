@@ -2,8 +2,9 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 from .models.user import User
+from .models.spot import Spot
 
-# User creation
+# User serializer
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
@@ -29,3 +30,9 @@ class UserRegisterSerializer(serializers.Serializer):
             raise serializers.ValidationError('Oops! Passwords don/"t match')
         
         return data
+
+# Spot
+class SpotSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Spot
+        fields = ('id', 'title', 'description', 'owner')
