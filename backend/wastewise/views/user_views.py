@@ -16,7 +16,7 @@ class Signup(generics.CreateAPIView):
     serializer_class = UserRegisterSerializer
 
     def post(self, request):
-        user = UserRegisterSerializer(data=request.data['credentials'])
+        user = UserRegisterSerializer(data=request.data)
         
         if user.is_valid():
             created_user = UserSerializer(data=user.data)
@@ -38,7 +38,7 @@ class Login(generics.CreateAPIView):
     serializer_class = UserSerializer
 
     def post(self, request):
-        creds = request.data['credentials']
+        creds = request.data
         
         user = authenticate(request, email=creds['email'], password=creds['password'])
 
