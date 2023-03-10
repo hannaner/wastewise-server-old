@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionMixin, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.conf import settings
 from rest_framework.authtoken.models import Token
 
@@ -26,7 +26,7 @@ class UserManager(BaseUserManager):
         user.save()
         return user
 
-class User(AbstractBaseUser, PermissionMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     """Database model for users"""
     email = models.EmailField(max_length=100, unique=True)
     is_active = models.BooleanField(default=True)
