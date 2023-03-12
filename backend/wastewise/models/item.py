@@ -10,7 +10,7 @@ class Item(models.Model):
         on_delete=models.CASCADE
     )
 
-    created_at = models.DateTimeField(auto_add_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -20,7 +20,7 @@ class Item(models.Model):
         Expiring on: {self.exp_date}
         """
     
-    def as_dict(self)
+    def as_dict(self):
         return {
             'id': self.id,
             'name': self.name,

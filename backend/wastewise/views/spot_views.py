@@ -10,7 +10,7 @@ from rest_framework.exceptions import PermissionDenied
 from ..models.spot import Spot
 from ..serializers import SpotSerializer, SpotWriteSerializer
 
-class Spots(generics.ListCreateAPIView):
+class SpotsView(generics.ListCreateAPIView):
     """
     Display all spots and create a spot
     /spots/
