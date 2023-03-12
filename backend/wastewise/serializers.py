@@ -3,6 +3,7 @@ from rest_framework import serializers
 
 from .models.user import User
 from .models.spot import Spot
+from .models.item import Item
 
 # User serializer
 class UserSerializer(serializers.ModelSerializer):
@@ -31,7 +32,7 @@ class UserRegisterSerializer(serializers.Serializer):
         
         return data
 
-# Spot
+# Spot serializers
 class SpotSerializer(serializers.ModelSerializer):
     class Meta:
         model = Spot
@@ -40,4 +41,15 @@ class SpotSerializer(serializers.ModelSerializer):
 class SpotWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Spot
+        fields = '__all__'
+
+# Item serializers
+class ItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Item
+        fields = '__all__'
+
+class ItemReadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Item
         fields = '__all__'
