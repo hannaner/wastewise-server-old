@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 # Register your models here.
 from .models.user import User
 from .models.spot import Spot
-from .models.post import Item
+from .models.item import Item
 
 class UserAdmin(BaseUserAdmin):
     ordering = ['id']
