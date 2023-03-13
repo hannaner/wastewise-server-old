@@ -27,7 +27,8 @@ class SpotsView(generics.ListCreateAPIView):
     def post(self, request):
         """Create Spot"""
         request.data['spot']['owner'] = request.user.id
-        serializer = SpotWriteSerializer(data=request.data)
+        serializer = SpotWriteSerializer(data=request.data['spot'])
+        
         if serializer.is_valid():
             serializer.save()
             return Response({'spot': serializer.data}, status=status.HTTP_201_CREATED)
@@ -40,12 +41,11 @@ class SpotDetailView(generics.RetrieveUpdateDestroyAPIView):
     def get(self, request, pk):
         """View single spot"""
         spot = get_object_or_404(Spot, pk=pk)
-        serializer = SpotSerializer(spot)
         
         if request.user != spot.owner:
             raise PermissionDenied('Unauthorized access')
         
-        data = SpotSerializer(spot)
+        serializer = SpotSerializer(spot)
         return Response({'spot': serializer.data})
     
     def patch(self, request, pk):
