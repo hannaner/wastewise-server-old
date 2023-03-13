@@ -22,6 +22,7 @@ class SpotsView(generics.ListCreateAPIView):
         """View all spots"""
         spots = Spot.objects.filter(owner=request.user.id)
         serializer = SpotSerializer(spots, many=True).data
+        console.log(serializer)
         return Response({ 'spots': serializer.data })
     
     def post(self, request):

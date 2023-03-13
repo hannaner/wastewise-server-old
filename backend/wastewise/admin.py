@@ -4,6 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 # Register your models here.
 from .models.user import User
 from .models.spot import Spot
+from .models.post import Item
 
 class UserAdmin(BaseUserAdmin):
     ordering = ['id']
@@ -33,3 +34,4 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Spot)
+admin.site.register(Item)
