@@ -21,8 +21,7 @@ class SpotsView(generics.ListCreateAPIView):
     def get(self, request):
         """View all spots"""
         spots = Spot.objects.filter(owner=request.user.id)
-        serializer = SpotSerializer(spots, many=True).data
-        console.log(serializer)
+        serializer = SpotSerializer(spots, many=True)
         return Response({ 'spots': serializer.data })
     
     def post(self, request):
@@ -46,7 +45,7 @@ class SpotDetailView(generics.RetrieveUpdateDestroyAPIView):
         if request.user != spot.owner:
             raise PermissionDenied('Unauthorized access')
         
-        data = SpotSerializer(spot).data
+        data = SpotSerializer(spot)
         return Response({'spot': serializer.data})
     
     def patch(self, request, pk):
