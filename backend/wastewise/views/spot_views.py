@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
 
 from ..models.spot import Spot
-from ..serializers import SpotSerializer, SpotWriteSerializer
+from ..serializers import SpotSerializer, SpotReadSerializer, SpotWriteSerializer
 
 class SpotsView(generics.ListCreateAPIView):
     """
@@ -21,13 +21,14 @@ class SpotsView(generics.ListCreateAPIView):
     def get(self, request):
         """View all spots"""
         spots = Spot.objects.filter(owner=request.user.id)
-        serializer = SpotSerializer(spots, many=True)
+        serializer = SpotReadSerializer(spots, many=True)
         return Response({ 'spots': serializer.data })
     
     def post(self, request):
         """Create Spot"""
         request.data['spot']['owner'] = request.user.id
         serializer = SpotWriteSerializer(data=request.data['spot'])
+        print(serializer)
         
         if serializer.is_valid():
             serializer.save()
@@ -45,7 +46,7 @@ class SpotDetailView(generics.RetrieveUpdateDestroyAPIView):
         if request.user != spot.owner:
             raise PermissionDenied('Unauthorized access')
         
-        serializer = SpotSerializer(spot)
+        serializer = SpotReadSerializer(spot)
         return Response({'spot': serializer.data})
     
     def patch(self, request, pk):

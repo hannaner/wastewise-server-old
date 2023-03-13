@@ -8,7 +8,7 @@ urlpatterns = [
     path('login/', Login.as_view(), name='login'),
     path('logout/', Logout.as_view(), name='logout'),
     path('spots/', SpotsView.as_view(), name='spots'),
-    path('spots/<int:pk>', SpotDetailView.as_view(), name='spots'),
+    path('spots/<int:pk>', SpotDetailView.as_view(), name='spot-detail'),
     path('items/', ItemsView.as_view(), name='items'),
-    path('items/<int:pk>', ItemDetailView.as_view(), name='items'),
+    path('items/<int:pk>', ItemDetailView.as_view(), name='item-detail'),
 ]
