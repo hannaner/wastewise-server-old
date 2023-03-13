@@ -38,6 +38,11 @@ class SpotSerializer(serializers.ModelSerializer):
         model = Spot
         fields = ('id', 'title', 'description', 'owner')
 
+class SpotReadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Spot
+        fields = '__all__'
+
 class SpotWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Spot
