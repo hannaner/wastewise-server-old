@@ -15,9 +15,9 @@ class ItemsView(generics.ListCreateAPIView):
     serializer_class = ItemSerializer
 
     def get(self, request):
-        # items = Item.objects.filter(spot_id=request.user.id)
-        # need to get spotId
-        items = Item.objects.filter(spot_id=request.data)
+        items = Item.objects.filter(spot_id=request.user.id)
+        # # need to get spotId
+        # items = Item.objects.filter(spot_id=request.data)
         print(request.user)
         serializer = ItemReadSerializer(items, many=True)
         return Response({'items': serializer.data})

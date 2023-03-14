@@ -1,13 +1,15 @@
 from django.db import models
 # Item model
+from .spot import Spot
 
 class Item(models.Model):
     name = models.CharField(max_length=250)
     quantity = models.CharField(max_length=100)
     exp_date = models.DateField(auto_now=False)
     spot_id = models.ForeignKey(
-        'Spot',
-        on_delete=models.CASCADE
+        Spot,
+        on_delete=models.CASCADE,
+        related_name='items'
     )
 
     created_at = models.DateTimeField(auto_now_add=True)

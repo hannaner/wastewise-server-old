@@ -11,4 +11,6 @@ urlpatterns = [
     path('spots/<int:pk>', SpotDetailView.as_view(), name='spot-detail'),
     path('items/', ItemsView.as_view(), name='items'),
     path('items/<int:pk>', ItemDetailView.as_view(), name='item-detail'),
+    # path('spots/<int:spot_id>/items', ItemsView.as_view(), name='spot-items'),
+    # path('spots/<int:spot_id>/items/<int:pk>', ItemDetailView.as_view(), name='spot-item-detail'),
 ]
