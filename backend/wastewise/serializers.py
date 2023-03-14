@@ -32,13 +32,31 @@ class UserRegisterSerializer(serializers.Serializer):
         
         return data
 
+# Item serializers
+class ItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Item
+        fields = '__all__'
+        depth = 1
+
+class ItemReadSerializer(serializers.ModelSerializer):
+    spot = serializers.StringRelatedField()
+
+    class Meta:
+        model = Item
+        fields = '__all__'
+
 # Spot serializers
 class SpotSerializer(serializers.ModelSerializer):
+    items = ItemSerializer(many=True, read_only=True)
+
     class Meta:
         model = Spot
         fields = '__all__'
 
 class SpotReadSerializer(serializers.ModelSerializer):
+    owner = serializers.StringRelatedField()
+    
     class Meta:
         model = Spot
         fields = '__all__'
@@ -46,15 +64,4 @@ class SpotReadSerializer(serializers.ModelSerializer):
 class SpotWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Spot
-        fields = '__all__'
-
-# Item serializers
-class ItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Item
-        fields = '__all__'
-
-class ItemReadSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Item
         fields = '__all__'

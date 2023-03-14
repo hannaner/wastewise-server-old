@@ -17,7 +17,8 @@ class SpotsView(generics.ListCreateAPIView):
     def get(self, request):
         """View all spots"""
         spots = Spot.objects.filter(owner=request.user.id)
-        serializer = SpotReadSerializer(spots, many=True)
+        # spots = spots.items_set
+        serializer = SpotSerializer(spots, many=True)
         return Response({ 'spots': serializer.data })
     
     def post(self, request):
@@ -34,9 +35,9 @@ class SpotDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SpotSerializer
 
     def get(self, request, pk):
-        """View single spot"""
+        """View single spot with all items associated"""
         spot = get_object_or_404(Spot, pk=pk)
-        serializer = SpotReadSerializer(spot)
+        serializer = SpotSerializer(spot)
         return Response({'spot': serializer.data})
     
     def patch(self, request, pk):
