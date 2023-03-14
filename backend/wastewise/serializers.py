@@ -36,7 +36,7 @@ class UserRegisterSerializer(serializers.Serializer):
 class SpotSerializer(serializers.ModelSerializer):
     class Meta:
         model = Spot
-        fields = ('id', 'title', 'description', 'owner')
+        fields = '__all__'
 
 class SpotReadSerializer(serializers.ModelSerializer):
     class Meta:
