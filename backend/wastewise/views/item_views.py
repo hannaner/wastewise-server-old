@@ -5,7 +5,7 @@ from rest_framework import status, generics
 from rest_framework.response import Response
 
 from ..models.item import Item
-from ..serializers import ItemSerializer, ItemReadSerializer
+from ..serializers import ItemSerializer, ItemReadSerializer, ItemWriteSerializer
 
 class ItemsView(generics.ListCreateAPIView):
     """
@@ -16,15 +16,13 @@ class ItemsView(generics.ListCreateAPIView):
 
     def get(self, request):
         items = Item.objects.filter(spot_id=request.user.id)
-        # # need to get spotId
-        # items = Item.objects.filter(spot_id=request.data)
-        print(request.user)
         serializer = ItemReadSerializer(items, many=True)
         return Response({'items': serializer.data})
     
     # create item
     def post(self, request):
-        serializer = ItemSerializer(data = request.data)
+        print(request.data)
+        serializer = ItemWriteSerializer(data = request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
