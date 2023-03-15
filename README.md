@@ -12,7 +12,7 @@ Resources:
 ### Walkthrough
 <figure>
     <figcaption>Entity relationship diagram (ERD)</figcaption>
-    <img alt="erd" src="backend/wastewise/images/ERD.jpg" width="50%%" height="50%">
+    <img alt="erd" src="backend/wastewise/images/ERD.jpg" width="100%%" height="100%">
 </figure>
 <figure>
     <figcaption>Login</figcaption>
