@@ -33,9 +33,9 @@ Resources:
 
 
 ## Getting Started
-- Deployed website: :construction: under construction :construction:
 - [Project planning](https://trello.com/invite/b/PEh64K59/ATTI39744314898e569baea8946417d090d1194B91FC/project-4)
 - [Client side repository](https://github.com/hannaner/wastewise-client)
+- Deployed website: :construction: under construction :construction:
 
 
 ## Next Steps
