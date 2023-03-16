@@ -12,19 +12,19 @@ Resources:
 ### Walkthrough
 <figure>
     <figcaption>Entity relationship diagram (ERD)</figcaption>
-    <img alt="erd" src="backend/wastewise/images/ERD.jpg" width="100%%" height="100%">
+    <img alt="erd" src="wastewise/images/ERD.jpg" width="100%%" height="100%">
 </figure>
 <figure>
     <figcaption>Login</figcaption>
-    <img alt="login" src="backend/wastewise/images/login.jpg" width="85%" height="85%">
+    <img alt="login" src="wastewise/images/login.jpg" width="85%" height="85%">
 </figure>
 <figure>
     <figcaption>Create spot</figcaption>
-    <img alt="new-user" src="backend/wastewise/images/new_user.jpg" width="85%" height="85%">
+    <img alt="new-user" src="wastewise/images/new_user.jpg" width="85%" height="85%">
 </figure>
 <figure>
     <figcaption>Add items to your spot</figcaption>
-    <img alt="all" src="backend/wastewise/images/show_all.jpg" width="85%" height="85%">
+    <img alt="all" src="wastewise/images/show_all.jpg" width="85%" height="85%">
 </figure>
 
 
